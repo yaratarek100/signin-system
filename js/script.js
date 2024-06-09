@@ -13,12 +13,13 @@ function display(message, color) {
 
 signinSubmit.addEventListener("click", (e) => {
   e.preventDefault();
+  signinSubmit.classList.toggle("active");
 
   if ((signinEmail.value == "") | (signinPass.value == "")) {
     display("All inputs is required", "rgb(209, 41, 41)");
   } else {
     // serch for email
-    var user = usersData.find((user) => user.userEmail == signinEmail.value);
+    var user = usersData.find((user) => user.userEmail.toLowerCase() == signinEmail.value.toLowerCase());
     if (user) {
       // check password
 

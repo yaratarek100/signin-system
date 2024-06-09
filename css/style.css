@@ -104,3 +104,7 @@ text-align: center;
 .alert{
     display: none;
 }
+
+.active{
+  box-shadow:0px 0px 5px 2px #17a2b8;
+}

@@ -15,6 +15,8 @@ function display(message, color) {
 // signup click
 signupSubmit.addEventListener("click", (e) => {
   e.preventDefault();
+  // add shdow
+  signupSubmit.classList.toggle("active");
 
   // empty inputs
   if (
@@ -29,7 +31,12 @@ signupSubmit.addEventListener("click", (e) => {
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(signupEmail.value)
     ) {
       // confirme email is not used
-      if (usersData.some((user) => user.userEmail == signupEmail.value)) {
+      if (
+        usersData.some(
+          (user) =>
+            user.userEmail.toLowerCase() == signupEmail.value.toLowerCase()
+        )
+      ) {
         display("Email already in use", "orange");
       } else {
         // registration
@@ -41,6 +48,9 @@ signupSubmit.addEventListener("click", (e) => {
         usersData.push(newUser);
         localStorage.setItem("usersData", JSON.stringify(usersData));
         display("Sign up successful", "green");
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 400);
       }
     } else {
       // email is not valied
