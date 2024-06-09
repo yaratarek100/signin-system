@@ -1,52 +1,39 @@
-var signupName = document.querySelector(`.signup input[type="text"]`);
-var signupEmail = document.querySelector(`.signup input[type="email"]`);
-var signupPass = document.querySelector(`.signup input[type="Password"]`);
-var signupsubmit = document.querySelector(`#submitup`);
-var test = document.querySelector(`#test`);
-var signupAlert = document.querySelector(`.signup .alert`);
-
 var signinEmail = document.querySelector(`.signin input[type="email"]`);
 var signinPass = document.querySelector(`.signin input[type="Password"]`);
-// var signinsubmit = document.querySelector(`#submitin`);
-console.log(signupsubmit);
+var signinSubmit = document.querySelector(`#submitin`);
 var signinAlert = document.querySelector(`.signin .alert`);
+var usersData = JSON.parse(localStorage.getItem("usersData")) || [];
 
-var usersData = [];
+// display message to the user
+function display(message, color) {
+  signinAlert.innerHTML = message;
+  signinAlert.style.color = color;
+  signinAlert.style.display = "block";
+}
 
+signinSubmit.addEventListener("click", (e) => {
+  e.preventDefault();
 
-document.addEventListener('DOMContentLoaded', function() {
-signupSubmit.addEventListener("click", function(e) {
-    e.preventDefault(); // لمنع إرسال النموذج للتجربة
-    console.log("Submit button clicked");
+  if ((signinEmail.value == "") | (signinPass.value == "")) {
+    display("All inputs is required", "rgb(209, 41, 41)");
+  } else {
+    // serch for email
+    var user = usersData.find((user) => user.userEmail == signinEmail.value);
+    if (user) {
+      // check password
+
+      if (user.userPass == signinPass.value) {
+        display("Login successful", "green");
+        var currentUser = user.userName.split(" ")[0];
+        localStorage.setItem("currentUser", currentUser);
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 400);
+      } else {
+        display("Incorrect password", "rgb(209, 41, 41)");
+      }
+    } else {
+      display("Incorrect email", "rgb(209, 41, 41)");
+    }
+  }
 });
-    signupSubmit.addEventListener("click", (e) => {
-        e.preventDefault();
-        console.log("h,metkmet");
-
-//   if (
-//     (signupName.value == "") |
-//     (signupEmail.value == "") |
-//     (signupPass.value == "")
-//   ) {
-//     signupAlert.style.display = block;
-//   } else {
-//     var newUser = {
-//       userName: signupName.value,
-//       userEmail: signupEmail.value,
-//       userPass: signupPass.value,
-//     };
-//     usersData.push(newUser);
-//     console.log(usersData);
-//     localStorage.setItem("usersData", JSON.stringify(usersData));
-//   }
-// });
-
-
-// signinSubmit.addEventListener("click", (e) => {
-//   e.preventDefault();
-// });
-
-})
-})
-
-// console.log(signupEmail);

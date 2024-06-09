@@ -40,9 +40,6 @@ form input::placeholder {
   color: lightgray;
 }
 
-form .alert {
-  color: rgb(209, 41, 41);
-}
 form .message,
 form a {
   color: white;
@@ -55,8 +52,10 @@ button ,.n-bar a{
 form a:not(:hover) {
   text-decoration: none;
 }
-form a:not(:hover) {
-  text-decoration: none;
+form button:hover {
+  background-color: #17a2b8;
+  color: #24353f;
+  cursor: pointer;
 }
 
 /* ==========home--------- */
